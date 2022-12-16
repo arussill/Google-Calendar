@@ -14,16 +14,43 @@ async function findFreeBusyByUsers(
   emailUser: Array<string>,
   fromDate: Date | string,
   toDate: Date | string
+  
 ) {
-  const events = await findEventsUsers(auth, emailUser, fromDate, toDate);
+  // const events = await findEventsUsers(auth, emailUser, fromDate, toDate);
 
-  if (typeof events === 'boolean') {
-    return events
+  // const freeSpace = () => {
+  //   if (typeof events === 'boolean') {
+  //   return events
+  // }else { 
+  //     return [fromDate, toDate]
+  //   }
+  // }
+
+  // return freeSpace
+
+
+  // events.forEach(event => {
+  //   const startTime = new Date("2022-12-15T08:00:00-05:00")//hora de inicio 
+  //   const freeSpace: any = []
+  //   if (event.start !== startTime){
+  //     const endTime = addHours(startTime, 1)
+  //     if ( event.end !== endTime){
+  //       // return freeSpace.push([startTime, endTime])
+  //     }
+  //   }
+  // });
+
+  const calendar = google.calendar({ version: "v3", auth });
+  const res = await calendar.freebusy.query({
+    timeMin:fromDate,
+    timeMax:toDate,
+    items:[{id:emailUser}]
+  })
+
+  if(!res){
+    console.log("Not free space")
   }
-
-  events.forEach((event) => {
-    
-  });
+  console.log(res.result)
 }
 
 export async function findEventsUsers(
@@ -83,6 +110,7 @@ const event = {
 
 async function createEvent(auth, event) {
   const calendar = google.calendar({ version: "v3", auth });
+  
   calendar.events.insert(
     {
       auth,
