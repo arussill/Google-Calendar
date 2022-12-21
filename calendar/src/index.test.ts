@@ -1,5 +1,5 @@
 import { google } from "googleapis";
-import { findEventsUsers } from "./calendar";
+import { findEventsUsers } from "./calendar/events/find";
 
 describe('Calendar Test', () => {
     

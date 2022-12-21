@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const calendar_1 = require("./calendar");
+const find_1 = require("./calendar/events/find");
 describe('Calendar Test', () => {
     jest.mock('./index.js'); // No
     const { auth } = require("@google-cloud/local-auth");
@@ -12,14 +12,14 @@ describe('Calendar Test', () => {
         //expected result
         };
         const expectedEvents = [expectedEvent];
-        const eventsUsers = (0, calendar_1.findEventsUsers)(auth, emailUsers, fromDate, toDate);
+        const eventsUsers = (0, find_1.findEventsUsers)(auth, emailUsers, fromDate, toDate);
         expect(eventsUsers).toEqual(expectedEvents);
     });
     test('test fail', () => {
         const emailUsers = ["aura.russill@sofka.com.co", "juliancamiloalvarez77@gmail.com"];
         const fromDate = "2022-12-08T07:00:00-05:00";
         const toDate = "2022-12-08T11:00:00-05:00";
-        const eventsUsers = (0, calendar_1.findEventsUsers)(auth, emailUsers, fromDate, toDate);
+        const eventsUsers = (0, find_1.findEventsUsers)(auth, emailUsers, fromDate, toDate);
         expect(eventsUsers).toEqual(false);
     });
     /////////otra////////////////////////////////////////////////////////////////////////////////////////////////

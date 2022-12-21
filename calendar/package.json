@@ -5,6 +5,7 @@
   "module": "src",
   "main": "index.js",
   "types": "index.d.ts",
+  "type": "commonjs",
   "scripts": {
     "build": "tsc",
     "auth": "node dist/src/auth/index.js",

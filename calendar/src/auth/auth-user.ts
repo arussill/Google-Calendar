@@ -28,3 +28,7 @@ async function authorize() {
       message: 'Not possible to authorize'
     };
   }
+
+export async function getAuthUser(token: string) {
+  return oauth2Client.setCredentials(token);
+}
